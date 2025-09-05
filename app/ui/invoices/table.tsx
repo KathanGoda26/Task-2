@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoice/buttons';
-import invoicetatus from '@/app/ui/invoice/status';
+import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
+import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredinvoice } from '@/app/lib/data';
 
@@ -37,7 +37,7 @@ export default async function invoiceTable({
                     </div>
                     <p className="text-sm text-gray-500">{invoice.email}</p>
                   </div>
-                  <invoicetatus status={invoice.status} />
+                  <InvoiceStatus status={invoice.status} />
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
@@ -105,7 +105,7 @@ export default async function invoiceTable({
                     {formatDateToLocal(invoice.date)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <invoicetatus status={invoice.status} />
+                    <InvoiceStatus status={invoice.status} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
