@@ -1,24 +1,24 @@
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
-import InvoiceStatus from '@/app/ui/invoices/status';
+import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoice/buttons';
+import invoicetatus from '@/app/ui/invoice/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
-import { fetchFilteredInvoices } from '@/app/lib/data';
+import { fetchFilteredinvoice } from '@/app/lib/data';
 
-export default async function InvoicesTable({
+export default async function invoiceTable({
   query,
   currentPage,
 }: {
   query: string;
   currentPage: number;
 }) {
-  const invoices = await fetchFilteredInvoices(query, currentPage);
+  const invoice = await fetchFilteredinvoice(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            {invoices?.map((invoice) => (
+            {invoice?.map((invoice) => (
               <div
                 key={invoice.id}
                 className="mb-2 w-full rounded-md bg-white p-4"
@@ -37,7 +37,7 @@ export default async function InvoicesTable({
                     </div>
                     <p className="text-sm text-gray-500">{invoice.email}</p>
                   </div>
-                  <InvoiceStatus status={invoice.status} />
+                  <invoicetatus status={invoice.status} />
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
                   <div>
@@ -78,7 +78,7 @@ export default async function InvoicesTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {invoices?.map((invoice) => (
+              {invoice?.map((invoice) => (
                 <tr
                   key={invoice.id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
@@ -105,7 +105,7 @@ export default async function InvoicesTable({
                     {formatDateToLocal(invoice.date)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <InvoiceStatus status={invoice.status} />
+                    <invoicetatus status={invoice.status} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
